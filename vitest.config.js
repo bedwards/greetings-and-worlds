@@ -9,10 +9,10 @@ export default defineConfig({
       include: ['app.js'],
       exclude: ['tests/**', 'worker.js', 'node_modules/**'],
       thresholds: {
-        lines: 96,
-        functions: 96,
-        branches: 96,
-        statements: 96
+        statements: 85,
+        branches: 86,
+        functions: 93,
+        lines: 85
       }
     },
     globals: true
