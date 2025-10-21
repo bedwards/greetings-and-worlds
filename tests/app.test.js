@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { 
-  fetchAPI, 
-  loadGreetings, 
-  loadAudiences, 
-  loadCombos, 
+import {
+  fetchAPI,
+  loadGreetings,
+  loadAudiences,
+  loadCombos,
   filterCombos,
   addGreeting,
   addAudience,
@@ -66,14 +66,14 @@ describe('API Functions', () => {
       { id: 1, text: 'Hello' },
       { id: 2, text: 'Hi' }
     ];
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => mockGreetings
     });
 
     await loadGreetings();
-    
+
     const select = document.getElementById('greeting-select');
     expect(select.options.length).toBe(3);
     expect(select.options[1].text).toBe('Hello');
@@ -85,14 +85,14 @@ describe('API Functions', () => {
       { id: 1, text: 'World' },
       { id: 2, text: 'Universe' }
     ];
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => mockAudiences
     });
 
     await loadAudiences();
-    
+
     const select = document.getElementById('audience-select');
     expect(select.options.length).toBe(3);
     expect(select.options[1].text).toBe('World');
@@ -100,44 +100,44 @@ describe('API Functions', () => {
 
   it('loadCombos should render combos', async () => {
     const mockCombos = [
-      { 
-        id: 1, 
-        greeting_id: 1, 
+      {
+        id: 1,
+        greeting_id: 1,
         audience_id: 1,
-        greeting_text: 'Hello', 
-        audience_text: 'World' 
+        greeting_text: 'Hello',
+        audience_text: 'World'
       }
     ];
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => mockCombos
     });
 
     await loadCombos();
-    
+
     const list = document.getElementById('combos-list');
     expect(list.innerHTML).toContain('Hello, World!');
   });
 
   it('filterCombos should filter by search query', async () => {
     const mockCombos = [
-      { 
-        id: 1, 
-        greeting_id: 1, 
+      {
+        id: 1,
+        greeting_id: 1,
         audience_id: 1,
-        greeting_text: 'Hello', 
-        audience_text: 'World' 
+        greeting_text: 'Hello',
+        audience_text: 'World'
       },
-      { 
-        id: 2, 
-        greeting_id: 2, 
+      {
+        id: 2,
+        greeting_id: 2,
         audience_id: 2,
-        greeting_text: 'Hi', 
-        audience_text: 'Universe' 
+        greeting_text: 'Hi',
+        audience_text: 'Universe'
       }
     ];
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => mockCombos
@@ -145,7 +145,7 @@ describe('API Functions', () => {
 
     await loadCombos();
     filterCombos('universe');
-    
+
     const list = document.getElementById('combos-list');
     expect(list.innerHTML).toContain('Universe');
     expect(list.innerHTML).not.toContain('World');
@@ -154,14 +154,14 @@ describe('API Functions', () => {
   it('addGreeting should post new greeting', async () => {
     const input = document.getElementById('greeting-input');
     input.value = 'Howdy';
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => ({ id: 3, text: 'Howdy' })
     });
 
     await addGreeting();
-    
+
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/greetings'),
       expect.objectContaining({
@@ -175,9 +175,9 @@ describe('API Functions', () => {
   it('addGreeting should show error for empty input', async () => {
     const input = document.getElementById('greeting-input');
     input.value = '';
-    
+
     await addGreeting();
-    
+
     const error = document.getElementById('greeting-error');
     expect(error.textContent).toBe('Please enter a greeting');
   });
@@ -185,14 +185,14 @@ describe('API Functions', () => {
   it('addAudience should post new audience', async () => {
     const input = document.getElementById('audience-input');
     input.value = 'Mars';
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => ({ id: 4, text: 'Mars' })
     });
 
     await addAudience();
-    
+
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/audiences'),
       expect.objectContaining({
@@ -205,19 +205,19 @@ describe('API Functions', () => {
   it('createCombo should post new combo', async () => {
     const greetingSelect = document.getElementById('greeting-select');
     const audienceSelect = document.getElementById('audience-select');
-    
+
     greetingSelect.innerHTML = '<option value="1">Hello</option>';
     audienceSelect.innerHTML = '<option value="2">World</option>';
     greetingSelect.value = '1';
     audienceSelect.value = '2';
-    
+
     global.fetch.mockResolvedValue({
       ok: true,
       json: async () => ({ id: 5, greeting_id: 1, audience_id: 2 })
     });
 
     await createCombo();
-    
+
     expect(global.fetch).toHaveBeenCalledWith(
       expect.stringContaining('/api/combos'),
       expect.objectContaining({
@@ -229,22 +229,22 @@ describe('API Functions', () => {
 
   it('createCombo should show error if selections missing', async () => {
     await createCombo();
-    
+
     const error = document.getElementById('combo-error');
     expect(error.textContent).toBe('Please select both greeting and audience');
   });
 
   it('showError should display and clear error message', () => {
     vi.useFakeTimers();
-    
+
     showError('greeting-error', 'Test error');
-    
+
     const error = document.getElementById('greeting-error');
     expect(error.textContent).toBe('Test error');
-    
+
     vi.advanceTimersByTime(5000);
     expect(error.textContent).toBe('');
-    
+
     vi.useRealTimers();
   });
 
@@ -256,7 +256,7 @@ describe('API Functions', () => {
     });
 
     await loadGreetings();
-    
+
     const error = document.getElementById('greeting-error');
     expect(error.textContent).toBe('Failed to load greetings');
   });
@@ -268,7 +268,7 @@ describe('API Functions', () => {
     });
 
     await loadCombos();
-    
+
     const list = document.getElementById('combos-list');
     expect(list.innerHTML).toContain('No combos found');
   });

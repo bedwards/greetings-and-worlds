@@ -66,7 +66,7 @@ psql "postgresql://postgres:password@localhost:5432/greetings" < schema.sql
 2. Install Wrangler: `npm install -g wrangler`
 3. Login: `wrangler login`
 4. Update `wrangler.toml` with your database connection string
-5. Deploy: `wrangler deploy worker.js`
+5. Deploy: `wrangler deploy worker.js --env=""`
 
 **Environment Variables:**
 

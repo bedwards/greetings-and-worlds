@@ -1,4 +1,4 @@
-import { Client } from 'pg';
+import { Client } from '@neondatabase/serverless';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -15,7 +15,7 @@ async function handleRequest(request, env) {
   const path = url.pathname;
 
   const client = new Client(env.DATABASE_URL);
-  
+
   try {
     await client.connect();
 

@@ -6,3 +6,4 @@ compatibility_date = "2025-01-01"
 vars = { ENVIRONMENT = "production" }
 
 node_compat = true
+preview_urls = true
