@@ -1,4 +1,4 @@
-# greetings-and-worlds
+# Greetings and worlds
 
 [![CI](https://github.com/bedwards/greetings-and-worlds/actions/workflows/ci.yml/badge.svg)](https://github.com/bedwards/greetings-and-worlds/actions)
 [![codecov](https://codecov.io/gh/bedwards/greetings-and-worlds/branch/main/graph/badge.svg)](https://codecov.io/gh/bedwards/greetings-and-worlds)
