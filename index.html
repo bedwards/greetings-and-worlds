@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greetings and Worlds - Interactive SQL Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Greetings and Worlds</h1>
+      <p>Interactive SQL demo with joinable tables</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <div class="input-group">
+          <h2>Add Greeting</h2>
+          <div class="form-row">
+            <input 
+              type="text" 
+              id="greeting-input" 
+              placeholder="Enter greeting (e.g., Hello)"
+              maxlength="255"
+            >
+            <button id="add-greeting-btn" class="btn btn-primary">Add Greeting</button>
+          </div>
+          <div id="greeting-error" class="error-message"></div>
+        </div>
+
+        <div class="input-group">
+          <h2>Add Audience</h2>
+          <div class="form-row">
+            <input 
+              type="text" 
+              id="audience-input" 
+              placeholder="Enter audience (e.g., World)"
+              maxlength="255"
+            >
+            <button id="add-audience-btn" class="btn btn-primary">Add Audience</button>
+          </div>
+          <div id="audience-error" class="error-message"></div>
+        </div>
+      </section>
+
+      <section class="selection-section">
+        <h2>Create Combo</h2>
+        <div class="combo-form">
+          <div class="select-group">
+            <label for="greeting-select">Select Greeting:</label>
+            <select id="greeting-select">
+              <option value="">-- Choose Greeting --</option>
+            </select>
+          </div>
+          
+          <div class="select-group">
+            <label for="audience-select">Select Audience:</label>
+            <select id="audience-select">
+              <option value="">-- Choose Audience --</option>
+            </select>
+          </div>
+          
+          <button id="create-combo-btn" class="btn btn-success">Create Combo</button>
+        </div>
+        <div id="combo-error" class="error-message"></div>
+      </section>
+
+      <section class="combos-section">
+        <div class="section-header">
+          <h2>Saved Combos</h2>
+          <input 
+            type="text" 
+            id="filter-input" 
+            placeholder="Filter combos..."
+            class="filter-input"
+          >
+        </div>
+        <div id="combos-list" class="combos-list">
+          <p class="empty-state">No combos yet. Create your first combo above!</p>
+        </div>
+      </section>
+    </main>
+
+    <div id="loading-spinner" class="spinner-overlay" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

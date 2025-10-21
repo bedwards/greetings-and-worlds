@@ -1,0 +1,8 @@
+name = "greetings-and-worlds-api"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+node_compat = true
