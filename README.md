@@ -129,7 +129,13 @@ Login and deploy:
 ```bash
 wrangler login
 wrangler secret put DATABASE_URL  # Paste your production connection string
-wrangler deploy
+wrangler deploy --env production
+```
+
+Ignore the following warning (`node_modules` is needed to import `pg` in local dev):
+
+```
+Unexpected fields found in top-level field: "node_modules"
 ```
 
 ### GitHub Pages
