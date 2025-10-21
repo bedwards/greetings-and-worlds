@@ -1,4 +1,17 @@
-const API_BASE = 'https://greetings-and-worlds-api.brian-mabry-edwards.workers.dev';
+/*
+ * While running wrangler dev, the index.html file injects window.API_BASE
+ * with the local URL (from .dev.vars, e.g. https://127.0.0.1:8787) and
+ * app.js reads that value to call the local API.
+ *
+ * In production, the index.html either sets window.API_BASE to the
+ * production Workers URL or leaves it undefined, and app.js falls back to
+ * the hard‑coded production URL if window.API_BASE is missing. -->
+ *
+ */
+const API_BASE =
+  typeof window !== 'undefined' && window.API_BASE
+    ? window.API_BASE
+    : 'https://greetings-and-worlds-api.brian-mabry-edwards.workers.dev';
 
 let greetings = [];
 let audiences = [];
