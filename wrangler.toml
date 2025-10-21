@@ -2,7 +2,6 @@ name = "greetings-and-worlds-api"
 main = "worker.js"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
-node_modules = true
 
 [env.production]
 vars = { ENVIRONMENT = "production" }

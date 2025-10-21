@@ -8,6 +8,7 @@ const corsHeaders = {
   'Access-Control-Max-Age': '86400',
 };
 
+
 async function handleRequest(request, env) {
   if (request.method === 'OPTIONS') {
     return new Response(null, {
@@ -19,7 +20,10 @@ async function handleRequest(request, env) {
   const url = new URL(request.url);
   const path = url.pathname;
 
-  // Use standard pg client instead of Neon serverless
+  if (!env.DATABASE_URL) {
+    return jsonResponse({ error: 'Database not configured' }, 500);
+  }
+
   const client = new Client({
     connectionString: env.DATABASE_URL,
   });
