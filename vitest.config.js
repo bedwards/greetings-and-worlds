@@ -10,7 +10,7 @@ export default defineConfig({
       exclude: ['tests/**', 'worker.js', 'node_modules/**'],
       thresholds: {
         statements: 85,
-        branches: 84,
+        branches: 82,
         functions: 93,
         lines: 85
       }

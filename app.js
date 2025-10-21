@@ -1,16 +1,6 @@
-/*
- * While running wrangler dev, the index.html file injects window.API_BASE
- * with the local URL (from .dev.vars, e.g. https://127.0.0.1:8787) and
- * app.js reads that value to call the local API.
- *
- * In production, the index.html either sets window.API_BASE to the
- * production Workers URL or leaves it undefined, and app.js falls back to
- * the hard‑coded production URL if window.API_BASE is missing. -->
- *
- */
 const API_BASE =
-  typeof window !== 'undefined' && window.API_BASE
-    ? window.API_BASE
+  window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8787'
     : 'https://greetings-and-worlds-api.brian-mabry-edwards.workers.dev';
 
 let greetings = [];
@@ -228,19 +218,7 @@ async function createCombo() {
   }
 }
 
-export {
-  fetchAPI,
-  loadGreetings,
-  loadAudiences,
-  loadCombos,
-  filterCombos,
-  addGreeting,
-  addAudience,
-  createCombo,
-  showError
-};
-
-export function initApp() {
+function initApp() {
   document.getElementById('add-greeting-btn')?.addEventListener('click', addGreeting);
   document.getElementById('add-audience-btn')?.addEventListener('click', addAudience);
   document.getElementById('create-combo-btn')?.addEventListener('click', createCombo);
@@ -265,4 +243,18 @@ if (typeof process === 'undefined' || process.env.NODE_ENV !== 'test') {
   } else {
     initApp();
   }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    fetchAPI,
+    loadGreetings,
+    loadAudiences,
+    loadCombos,
+    filterCombos,
+    addGreeting,
+    addAudience,
+    createCombo,
+    showError
+  };
 }
