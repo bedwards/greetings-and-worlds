@@ -1,7 +1,7 @@
 const API_BASE =
   window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8787'
-    : 'https://greetings-and-worlds-api.brian-mabry-edwards.workers.dev';
+    : 'https://greetings-and-worlds-api-production.brian-mabry-edwards.workers.dev';
 
 let greetings = [];
 let audiences = [];
